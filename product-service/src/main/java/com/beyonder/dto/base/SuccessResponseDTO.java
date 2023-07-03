@@ -1,7 +1,7 @@
 package com.beyonder.dto.base;
 
 public class SuccessResponseDTO {
-    private String code;
+    public String code;
     private String message;
 
     public SuccessResponseDTO(String code, String message) {

@@ -18,19 +18,29 @@ public class Product {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id")
+    @Column(name = "id", length = 36)
     private String id;
+
     @NotNull
-    @Size(min = 2, max = 100)
+    @Size(min = 2, max = 255) // Increased size to 255 for product names
+    @Column()
     private String name;
 
     @NotNull
-    @Size(min = 2, max = 100)
+    @Size(min = 2, max = 100) // Kept size at 100 for product codes
+    @Column(length = 100)
     private String code;
 
     @NotNull
     @DecimalMin("0.0")
-    private Double price;
+    private Double priceItem;
+
+    @NotNull
+    @DecimalMin("0.0")
+    private Double priceItemfo;
+
+    @Column(name = "abik_fo")
+    private String abi;
 
     @NotNull
     @Min(0)
@@ -44,10 +54,10 @@ public class Product {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "created_by")
+    @Column(name = "created_by", length = 100) // Assuming the user name or id who created the product, size can be adjusted based on actual data
     private String createdBy;
 
-    @Column(name = "updated_by")
+    @Column(name = "updated_by", length = 100) // Assuming the user name or id who updated the product, size can be adjusted based on actual data
     private String updatedBy;
 
     public String getId() {
@@ -74,12 +84,12 @@ public class Product {
         this.code = code;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getPriceItem() {
+        return priceItem;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPriceItem(Double price) {
+        this.priceItem = price;
     }
 
     public Integer getStock() {
@@ -120,5 +130,21 @@ public class Product {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getAbi() {
+        return abi;
+    }
+
+    public void setAbi(String abi) {
+        this.abi = abi;
+    }
+
+    public Double getPriceItemfo() {
+        return priceItemfo;
+    }
+
+    public void setPriceItemfo(Double priceItemfo) {
+        this.priceItemfo = priceItemfo;
     }
 }
