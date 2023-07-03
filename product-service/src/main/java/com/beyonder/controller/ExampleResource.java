@@ -1,4 +1,4 @@
-package com.beyonder;
+package com.beyonder.controller;
 
 import com.beyonder.dto.request.AddProductReqDTO;
 import com.beyonder.model.Product;
@@ -32,19 +32,6 @@ public class ExampleResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response addProduct(AddProductReqDTO addProductReqDTO) throws JsonProcessingException {
-        ObjectMapper omm = new ObjectMapper();
-        String jsn = omm.writeValueAsString(addProductReqDTO);
-        System.out.println(jsn);
-        Product product = new Product();
-        product.setProductName(addProductReqDTO.getName());
-        product.setProductCode(addProductReqDTO.getCode());
-        productList.add(product);
-
-        for(Product prod: productList){
-            ObjectMapper objectMapper = new ObjectMapper();
-            String json = objectMapper.writeValueAsString(prod);
-            System.out.println(json);
-        }
         return Response.ok().entity(productList).build();
     }
 }

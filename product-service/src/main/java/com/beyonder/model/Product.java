@@ -1,40 +1,124 @@
 package com.beyonder.model;
 
+import io.smallrye.common.constraint.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "products")
 public class Product {
-    private String productName;
-    private String productCode;
-    private Double productPrice;
-    private Integer productStock;
 
-    public String getProductName() {
-        return productName;
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "id")
+    private String id;
+    @NotNull
+    @Size(min = 2, max = 100)
+    private String name;
+
+    @NotNull
+    @Size(min = 2, max = 100)
+    private String code;
+
+    @NotNull
+    @DecimalMin("0.0")
+    private Double price;
+
+    @NotNull
+    @Min(0)
+    private Integer stock;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "updated_by")
+    private String updatedBy;
+
+    public String getId() {
+        return id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getProductCode() {
-        return productCode;
+    public String getName() {
+        return name;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Double getProductPrice() {
-        return productPrice;
+    public String getCode() {
+        return code;
     }
 
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public Integer getProductStock() {
-        return productStock;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setProductStock(Integer productStock) {
-        this.productStock = productStock;
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
     }
 }

@@ -1,4 +1,4 @@
-package com.beyonder;
+package com.beyonder.controller;
 
 import com.beyonder.dto.AuthRestRespDTO;
 import com.beyonder.proxy.AuthRest;
