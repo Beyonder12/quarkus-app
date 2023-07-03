@@ -2,15 +2,28 @@ version: "3.9"
 
 services:
   auth-service:
+#    hostname: localhost
+    container_name: auth-service
     build:
       context: ./auth-service
       dockerfile: Dockerfile
+    environment:
+      - QUARKUS_HTTP_PORT=2001
+      - QUARKUS_HTTP_ROOT_PATH=/auth-service/api
+      - QUARKUS_SWAGGER_UI_ALWAYS_INCLUDE=true
     ports:
       - "1001:2001"
-
   product-service:
+    #    hostname: localhost
+    container_name: product-service
     build:
       context: ./product-service
       dockerfile: Dockerfile
+    environment:
+      - QUARKUS_HTTP_PORT=2002
+      - QUARKUS_HTTP_ROOT_PATH=/product-service/api
+      - QUARKUS_SWAGGER_UI_ALWAYS_INCLUDE=true
+    expose:
+      - "2002"
     ports:
       - "1002:2002"

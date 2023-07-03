@@ -1,29 +1,22 @@
-# Use the official maven/Java 17 image to create a build artifact.
-FROM maven:3.8.4-openjdk-17 as builder
+FROM maven:3.8.4-openjdk-17 AS maven
 
-# Set the working directory in the image to /app
-WORKDIR /app
+WORKDIR /usr/src/app
+#COPY . /usr/src/app
 
-# Copy the pom.xml file into the image
 COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Download all required dependencies into one layer
-RUN mvn dependency:go-offline -B
+COPY src/ src/
+RUN mvn clean package -DskipTests
 
-# Copy your other files
-COPY src ./src
+FROM openjdk:17-jdk-slim
 
-# Build a release artifact.
-RUN mvn package -DskipTests
+WORKDIR /opt/app/
 
-# Use openjdk for the final image
-FROM openjdk:17-jdk-alpine
+# COPY the whole quarkus-app directory, not just the JAR file
+COPY --from=maven /usr/src/app/target/quarkus-app/ /opt/app/quarkus-app
 
-# Set the working directory in the image to /app
-WORKDIR /app
+EXPOSE 2001
 
-# Copy the jar file into the image
-COPY --from=builder /app/target/*.jar /app/auth-service.jar
-
-# Run the application
-CMD ["java", "-jar", "/app/auth-service.jar"]
+# Run the JAR file within the quarkus-app directory
+ENTRYPOINT ["java", "-jar", "quarkus-app/quarkus-run.jar"]
