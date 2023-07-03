@@ -1,3 +1,6 @@
+# Swagger/OpenAPI
+http://localhost:1002/product-service/api/q/swagger-ui/
+
 # product-service
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.

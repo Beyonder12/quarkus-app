@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-@Path("/hello")
+@Path("/v1/hello")
 public class ExampleResource {
     List<Product> productList = new ArrayList<>();
 
