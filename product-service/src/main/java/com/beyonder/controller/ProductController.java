@@ -38,4 +38,12 @@ public class ProductController {
         return Response.ok().entity(new SuccessResponseDTO(CodeStatusConst.CREATED, "Created")).build();
 
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Get all data", description = "Data can be fetched either by filter or not")
+    public Response getAll(@QueryParam("name") String name, @QueryParam("code") String code ) {
+        log.info("getAll method called with name : {}, code : {}", name, code);
+        return Response.ok().entity(productService.getAll(name, code)).build();
+    }
 }

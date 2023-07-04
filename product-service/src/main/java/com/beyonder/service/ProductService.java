@@ -7,6 +7,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+import java.util.List;
+
 @ApplicationScoped
 public class ProductService {
     @Inject
@@ -21,5 +23,9 @@ public class ProductService {
         product.setPriceItem(createProductReqDTO.getPrice());
 
         productRepository.persist(product);
+    }
+
+    public List<Product> getAll(String name, String code) {
+        return productRepository.getAll(name, code);
     }
 }
