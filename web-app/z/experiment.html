@@ -1,0 +1,81 @@
+<html>
+
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+
+    function Header({name}) {
+        return (<h1>Belajar React bareng {name} 🚀 </h1>);
+    }
+
+    function HomePage() {
+        const nameList = ["fajri", "abi", "ami"]
+        const [value, setValue] = React.useState(0)
+        const intervalId = React.useRef();
+
+        function startIncreasing() {
+            intervalId.current = setInterval(() => setValue(prevValue => prevValue + 1), 200);
+        }
+
+        function stopIncreasing() {
+            clearInterval(intervalId.current);
+        }
+
+        function handleClickMinus() {
+            setValue(value - 1)
+        }
+
+        function handleReset() {
+            setValue(0)
+        }
+
+        return (
+            <>
+                <Header name="fajri"/>
+                <ul>
+                    {
+                        nameList.map(name => (
+                            <li key={name}>{name}</li>
+                        ))
+                    }
+                </ul>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: "left",
+                    alignItems: 'center',
+                    margin: "20px"
+                }}>
+                    <button onClick={handleClickMinus}> - </button>
+                    <div style={{marginLeft:'20px', marginRight:'20px'}}>{value}</div>
+                    <button
+                        onMouseDown={startIncreasing}
+                        onMouseUp={stopIncreasing}
+                        onMouseOut={stopIncreasing}
+                    >
+                        +
+                    </button>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'left',
+                    alignItems: 'center',
+                    marginLeft: "30px"
+                }}>
+                    <button onClick={handleReset}> Reset </button>
+                </div>
+            </>
+        );
+    }
+
+    root.render(<HomePage />);
+</script>
+</body>
+
+</html>
