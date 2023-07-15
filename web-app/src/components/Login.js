@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import '../styles/Login.css'; // Import the CSS
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -10,20 +12,20 @@ function Login() {
             username: username,
             password: password
         }
-        // In real application, send userData to your API for login process
-        console.log('Login User', userData);
+        console.log('Logged In User', userData);
         setUsername('');
         setPassword('');
     }
 
     return (
-        <div className="App">
+        <div className="login-container"> {/* Apply the styles */}
             <h1>Login</h1>
-            <form>
+            <form className="login-form" onSubmit={handleLogin}>
                 <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                <button type="submit" onClick={handleLogin}>Login</button>
+                <button type="submit">Login</button>
             </form>
+            <p>Don't have an account? <Link to="/register">Register</Link></p> {/* Add this line */}
         </div>
     );
 }
