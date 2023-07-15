@@ -11,28 +11,39 @@
 
 .register-form {
     background: #fff;
-    padding: 50px;
+    padding: 40px 0;  /* only set top and bottom padding, left and right padding are 0 */
     border-radius: 15px;
+    max-width: 500px; /* reduce max-width to 500px for a narrower form */
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
+#register-input-units {
+    margin-left: 80px;
+
+}
+
 .register-form input {
-    margin: 10px 5px;
-    padding: 12px 10px;
+    box-sizing: border-box;  /* add this line */
+    max-width: 80%;  /* reduce width to 80% of the container */
+    margin: 10px auto;
+    padding: 10px 10px; /* modify this line: adjust padding */
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
+    font-size: 18px;
 }
 
 .register-form button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 19px;
-    margin: 10px 5px;
+    padding: 5px 10px;
+    max-width: 80%;  /* reduce width to 80% of the container */
+    margin: 10px auto;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 104.3%;
+    width: 100%;
+    font-size: 18px;
 }
 
 .register-form button:hover {
