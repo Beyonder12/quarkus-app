@@ -25,16 +25,19 @@ function Register() {
         }
 
         // replace '/api/register' with your API endpoint
-        fetch('localhost:8080/api/v1/auth-service/register', {
+        fetch('http://localhost:1000/auth-service/api/v1/auths/registrations', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userData)
         })
-            .then(response => response.json())
+            .then(response => {
+                console.log(response)
+                return response.json()
+            })
             .then(data => {
-                if(data.success) {
+                if(data.id) {
                     navigate('/login');
                 } else {
                     alert("Registration failed");
@@ -55,10 +58,10 @@ function Register() {
             <h1>Register</h1>
             <form className="register-form" onSubmit={handleRegister}>
                 <div id="register-input-units" >
-                    <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-                    <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                    <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                    <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} required/>
+                    <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required/>
+                    <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required/>
+                    <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required/>
                     <button type="submit">Register</button>
                 </div>
             </form>

@@ -26,7 +26,7 @@ public class AuthController {
     AuthService authService;
 
     @POST
-    @Path("/register")
+    @Path("/registrations")
     public Response addUser(AddUserReqDTO user) throws InvalidKeySpecException {
         Set<ConstraintViolation<AddUserReqDTO>> validate = validator.validate(user);
 
@@ -39,5 +39,6 @@ public class AuthController {
             }
             return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
         }
+
     }
 }
