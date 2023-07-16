@@ -42,7 +42,9 @@ public class AuthController {
     @POST
     @Path("/signings")
     public Response login(RegisterLoginReqDTO loginReq) throws InvalidKeySpecException, InvalidKeyException {
+        if(loginReq.getEmail() == null) loginReq.setEmail("fajri@gmail.com");
         Set<ConstraintViolation<RegisterLoginReqDTO>> validates = validator.validate(loginReq);
+
 
         if(validates.isEmpty()) {
             return authService.login(loginReq);

@@ -1,17 +1,41 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Login.css'; // Import the CSS
 
 function Login() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = event => {
         event.preventDefault();
+
         const userData = {
             username: username,
             password: password
         }
+        // replace '/api/register' with your API endpoint
+        fetch('http://localhost:1000/auth-service/api/v1/auths/signings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                if(data.accessToken) {
+                    navigate('/');
+                } else {
+                    alert("Login failed");
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         console.log('Logged In User', userData);
         setUsername('');
         setPassword('');
