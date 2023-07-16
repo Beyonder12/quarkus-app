@@ -28,7 +28,7 @@ function Login() {
             .then(data => {
                 console.log(data)
                 if(data.accessToken) {
-                    navigate('/');
+                    navigate('/home');
                 } else {
                     alert("Login failed");
                 }
