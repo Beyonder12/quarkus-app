@@ -1,8 +1,8 @@
-package com.beyonder.dto;
+package com.beyonder.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 
-public class AddUserReqDTO {
+public class RegisterLoginReqDTO {
 
     @NotNull
     private String username;

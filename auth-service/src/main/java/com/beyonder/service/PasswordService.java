@@ -6,6 +6,7 @@ import org.wildfly.security.password.Password;
 import org.wildfly.security.password.PasswordFactory;
 import org.wildfly.security.password.interfaces.BCryptPassword;
 import org.wildfly.security.password.interfaces.ClearPassword;
+import org.wildfly.security.password.spec.ClearPasswordSpec;
 import org.wildfly.security.password.spec.EncryptablePasswordSpec;
 import org.wildfly.security.password.spec.IteratedSaltedPasswordAlgorithmSpec;
 import org.wildfly.security.password.util.ModularCrypt;
@@ -30,5 +31,12 @@ public class PasswordService {
         BCryptPassword bcryptPassword = (BCryptPassword) passwordFactory.generatePassword(encryptableSpec);
         return ModularCrypt.encodeAsString(bcryptPassword);
     }
+
+    public boolean checkPassword(String hashedPassword, String clearPassword) throws InvalidKeySpecException, InvalidKeyException {
+        BCryptPassword storedPassword = (BCryptPassword) passwordFactory.translate(ModularCrypt.decode(hashedPassword));
+
+        return passwordFactory.verify(storedPassword, clearPassword.toCharArray());
+    }
+
 }
 
