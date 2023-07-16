@@ -18,8 +18,8 @@ public class ThrowableExceptionHandler implements ExceptionMapper<Throwable> {
     public Response toResponse(Throwable ex) {
         log.error("auth-Service", ex);
         JsonObject result = new JsonObject();
-        result.put("message",ex.getMessage());
         result.put("code", 500);
+        result.put("message",ex.getMessage());
         return Response.serverError().entity(result).build();
     }
 }
