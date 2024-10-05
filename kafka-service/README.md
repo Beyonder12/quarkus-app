@@ -66,3 +66,5 @@ Use Quarkus Messaging
 
 [Related Apache Kafka guide section...](https://quarkus.io/guides/kafka-reactive-getting-started)
 
+### Kafka Docker Compose in root directory quarkus https://github.com/Beyonder12/quarkus-app/blob/f84019877007291f1097f3f104264e146d2d4656/kafka-service
+kafka docker compose for local testing
