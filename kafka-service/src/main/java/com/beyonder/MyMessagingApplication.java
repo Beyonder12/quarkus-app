@@ -21,7 +21,7 @@ public class MyMessagingApplication {
      * Messages are sent to the broker.
      **/
     void onStart(@Observes StartupEvent ev) {
-        Stream.of("Hello", "with", "Quarkus", "Messaging", "message").forEach(string -> emitter.send(string));
+        Stream.of("Hello", "with", "Quarkus", "Messaging", "message...").forEach(string -> emitter.send(string));
     }
 
     /**
